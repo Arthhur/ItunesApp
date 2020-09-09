@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { urlSearch, urlLookup } from '../../utils/api';
+import { urlSearch } from '../../utils/api';
 import Search from '../Search/Search';
 import List from '../List/List';
-import Album from '../Album/Album';
 
-
-
-interface IArtist {
-    artistId : number,
-    artistName: string
-};
 
 const Artist: React.FC = () => {
 
     const [artists, setArtists] = useState<any []>([]);
     const [filter, setFilter] = useState('');
-    const [artistName, setArtistName] = useState('');
-    const [artistId, setArtistId] = useState('');
 
     const getArtist = (artistFilter: string) => {
         const headers = {

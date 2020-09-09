@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { urlLookup } from '../../utils/api';
-import CollapseTable from '../CollapseTable/CollapseTable';
 import PlayerAudio from './../PlayerAudio/PlayerAudio';
 
 interface ITrack {
     albumId: string
 }
+
 const Track: React.FC<ITrack> = ({albumId}) => {
     const [tracks, setTracks] = useState<any[]>([]);
 
@@ -23,7 +23,6 @@ const Track: React.FC<ITrack> = ({albumId}) => {
 
     useEffect(() => {
         getTrack(albumId);
-        console.log(tracks);
     }, [albumId]);
 
     return (
