@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { urlSearch } from '../../utils/api';
 import Search from '../Search/Search';
 import List from '../List/List';
+import fetchJsonp from 'fetch-jsonp';
 
 
 const Artist: React.FC = () => {
@@ -13,7 +14,7 @@ const Artist: React.FC = () => {
         const headers = {
             'content-type': 'application/json'
         };
-        fetch(`${urlSearch}media=music&country=US&entity=musicArtist&term=${artistFilter}`, { headers })
+        fetchJsonp(`${urlSearch}media=music&country=US&entity=musicArtist&term=${artistFilter}`)
             .then(result => result.json())
             .then(artists => {
                 setArtists(artists.results.filter((artist: any) => artist.artistName.toLowerCase().includes(artistFilter.toLowerCase())))
