@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CollapseTable from '../CollapseTable/CollapseTable';
 import { urlLookup } from "../../utils/api";
 import { IArtist } from "../../interfaces/IArtist";
+import fetchJsonp from 'fetch-jsonp';
 
 
 const Album: React.FC<IArtist> = ({artist}) => {
@@ -9,10 +10,7 @@ const Album: React.FC<IArtist> = ({artist}) => {
 
 
     const getAlbum = (artistId: string) => {
-        const headers = {
-            'content-type': 'application/json'
-        };
-        fetch(`${urlLookup}entity=album&id=${artistId}`, { headers })
+        fetchJsonp(`${urlLookup}entity=album&id=${artistId}`)
             .then(result => result.json())
             .then(albums => {
                 setAlbums(albums.results.filter((album: any) => album.wrapperType === 'collection'));
