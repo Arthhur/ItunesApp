@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { urlSearch } from '../../utils/api';
 import Search from '../Search/Search';
 import List from '../List/List';
@@ -14,9 +13,10 @@ const Artist: React.FC = () => {
         const headers = {
             'content-type': 'application/json'
         };
-        axios.get(`${urlSearch}media=music&country=US&entity=musicArtist&term=${artistFilter}`, { headers })
-            .then(result => {
-                setArtists(result.data.results.filter((artist: any) => artist.artistName.toLowerCase().includes(artistFilter.toLowerCase())))
+        fetch(`${urlSearch}media=music&country=US&entity=musicArtist&term=${artistFilter}`, { headers })
+            .then(result => result.json())
+            .then(artists => {
+                setArtists(artists.results.filter((artist: any) => artist.artistName.toLowerCase().includes(artistFilter.toLowerCase())))
             });
     }
 

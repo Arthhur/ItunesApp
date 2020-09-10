@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { urlLookup } from '../../utils/api';
 import PlayerAudio from './../PlayerAudio/PlayerAudio';
 
@@ -14,10 +13,10 @@ const Track: React.FC<ITrack> = ({albumId}) => {
         const headers = {
             'content-type': 'application/json'
         };
-        axios.get(`${urlLookup}&entity=song&id=${albumId}`, { headers })
-            .then(result => {
-                console.log(result.data.results);
-                setTracks(result.data.results.filter((track: any) => track.wrapperType === 'track'));
+        fetch(`${urlLookup}&entity=song&id=${albumId}`, { headers })
+        .then(result => result.json())
+        .then(tracks => {
+                setTracks(tracks.results.filter((track: any) => track.wrapperType === 'track'));
             });
     }
 
