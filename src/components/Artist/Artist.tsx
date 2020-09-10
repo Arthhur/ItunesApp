@@ -11,9 +11,6 @@ const Artist: React.FC = () => {
     const [filter, setFilter] = useState('');
 
     const getArtist = (artistFilter: string) => {
-        const headers = {
-            'content-type': 'application/json'
-        };
         fetchJsonp(`${urlSearch}media=music&country=US&entity=musicArtist&term=${artistFilter}`)
             .then(result => result.json())
             .then(artists => {
